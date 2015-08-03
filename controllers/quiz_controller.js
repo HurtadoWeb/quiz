@@ -83,6 +83,13 @@ exports.update = function(req, res) {
     ); 
 };
 
+//DELETE /quizes/:id
+exports.destroy = function(req, res) {
+  req.quiz.destory().then (function() {
+    res.redirect('/quizes', {errors: []});
+  }).catch(function(error) {next(error)});
+};
+
 //GET/ Author
 exports.author = function(req, res) {
 	res.render('author', {errors: []});
