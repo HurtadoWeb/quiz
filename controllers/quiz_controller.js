@@ -4,8 +4,8 @@ var models = require('../models/models.js');
 //Autoload  - factoriza el código si ruta incluye :quizId
 exports.load = function(req, res, next, quizId){
    models.Quiz.findById(
-        where: { id: Number(quizId)},
-        include: [{ model: models.Comment }]
+       { where: { id: Number(quizId)},
+        include: [{ model: models.Comment }] }
       ).then(
       function(quiz) {
          if(quiz) {
@@ -25,7 +25,7 @@ exports.load = function(req, res, next, quizId){
 };*/
 
 // GET /quizes?search=texto_a_Buscar
-exports.index = function(req, res, -search) {
+exports.index = function(req, res, search) {
    models.Quiz.findAll({where: ["pregunta like ?", search]}).then(function(quizes) {  
    res.render('quizes/', {quizes: quizes, errors: []});
    }).catch(function(error) { next(error);})
